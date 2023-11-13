@@ -10,28 +10,28 @@ int coinchange(int coins[],int n,int amount){
 if(amount ==0 || n==0)
 return 0;
 
-int table[n+1][amount];
-
-for(int i=0;i<=n;i++){
-table[i][0]=0;
-}
-
-for(int i=1;i<=amount;i++) table[n][i]=MAX;
-
+int table[n+1][amount+1];
+for(int i=0;i<=amount;i++) table[0][i]=0;
+for(int i=0;i<=n;i++) table[i][0]=0;
 for(int i=1;i<=n;i++){
-for(int j=1;i<=amount;j++){
-if(coins[i]>j) table[i][j]=table[i+1][j];
-else{
-table[i][j]=min(table[i+1][j],1+table[i][j-coins[i]]);
+for(int j=1;j<=amount;j++)
+ table[i][j]=MAX;
+}
+for(int i=1;i<=n;i++)
+{
+for(int j=1;j<=amount;j++){
+ if(coins[i]>j) table[i-1][j];
+ else{
+ table[i][j]=min(table[i-1][j],1+table[i][j-coins[i-1]]);
+ }
 }
 }
+for(int i=0;i<=n;i++){
+for(int j=0;j<=amount;j++)
+printf("%d ",table[i][j]);
+printf("\n");
 }
-for (int i=0;i<=n;i++)
-	{
-	for(int j=0;j<=amount;j++) printf("%d \t",table[i][j]);
-	printf("\n");
-	}
-	return 5;
+ return 1;
 }
 
 int main(int argc,char* argv[]){
