@@ -41,7 +41,7 @@ typedef struct item{
  }
  
  void knapsack(item items[],int capacity,int n){
- //calsulate the ratio for each item
+ //calculate the ratio for each item
  for(int i=0;i<n;i++)
  items[i].ratio= (float) items[i].profit/items[i].weight;
  
